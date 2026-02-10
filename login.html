@@ -44,6 +44,11 @@
 </head>
 <body>
     <div class="login-container">
+        <a href="index.html" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6 w-fit">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            <span class="text-sm font-medium">Back to Home</span>
+        </a>
+
         <div class="logo-section">
             <img src="logo-v.png" alt="Vanstra Bank" class="logo-img">
             <h1 class="text-white text-2xl font-bold mb-1">Vanstra Bank</h1>
@@ -115,9 +120,10 @@
 
     <script src="bank-core-v2.js"></script>
     <script>
-        if (window.VanstraBank && VanstraBank.isAuthenticated()) {
-            window.location.href = 'dashboard-v2.html';
-        }
+        // Keep user on login form - don't auto-redirect
+        // if (window.VanstraBank && VanstraBank.isAuthenticated()) {
+        //     window.location.href = 'dashboard-v2.html';
+        // }
 
         function handleLogin(event) {
             event.preventDefault();
@@ -134,6 +140,7 @@
                 const result = VanstraBank.login(email, password);
                 if (result.success) {
                     localStorage.setItem('currentSession', result.sessionToken);
+                    // Redirect to dashboard
                     window.location.href = 'dashboard-v2.html';
                 } else {
                     errorMsg.textContent = result.error;
@@ -195,9 +202,11 @@
         })();
     </script>
     
-    <!-- 3CX Live Chat Widget -->
+    <!-- 3CX Live Chat Widget - Disabled during development to prevent CORS errors -->
+    <!-- 
     <call-us-selector phonesystem-url="https://1575.3cx.cloud" party="LiveChat962369"></call-us-selector>
     <script defer src="https://downloads-global.3cx.com/downloads/livechatandtalk/v1/callus.js" id="tcx-callus-js" charset="utf-8"></script>
+    -->
 </body>
 </html>
 
